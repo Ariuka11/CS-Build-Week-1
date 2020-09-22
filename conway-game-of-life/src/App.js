@@ -15,29 +15,34 @@ const possiblities = [
   [-1, -1],
 ]
 
+const emptyGrid = () => {
+  const rows = []
+  for (let i = 0; i < rowNum; i++) {
+    rows.push(Array.from(Array(colNum), () => 0))
+  }
+  return rows
+}
+
 function App() {
   const [grid, setGrid] = useState(() => {
-    const rows = []
-    for (let i = 0; i < rowNum; i++) {
-      rows.push(Array.from(Array(colNum), () => 0))
-    }
-    return rows
+    return emptyGrid()
   })
-
+  const [preset, setPreset] = useState()
   const [run, setRun] = useState(false)
-
+  const [gen, setGen] = useState(0)
   const runRef = useRef(run)
   runRef.current = run
-
   const startSimulation = useCallback(() => {
     if (!runRef.current) {
       return
     } else {
+      setGen((gen) => (gen += 1))
       setGrid((g) => {
         return produce(g, (gridCopy) => {
           for (let i = 0; i < rowNum; i++) {
             for (let j = 0; j < colNum; j++) {
               let neighbors = 0
+
               possiblities.forEach(([x, y]) => {
                 const newI = i + x
                 const newJ = j + y
@@ -75,6 +80,7 @@ function App() {
                 const newGrid = produce(grid, (gridCopy) => {
                   gridCopy[i][j] = gridCopy[i][j] ? 0 : 1
                 })
+                setPreset(newGrid)
                 setGrid(newGrid)
               }}
               style={{
@@ -87,6 +93,11 @@ function App() {
           ))
         )}
       </div>
+      <div>
+        {" "}
+        Generation:{"  "}
+        {gen}
+      </div>
       <button
         onClick={() => {
           setRun(!run)
@@ -97,6 +108,14 @@ function App() {
         }}
       >
         {run ? "Stop" : "Start"}
+      </button>
+      <button
+        onClick={() => {
+          setGrid(emptyGrid())
+          setGen(0)
+        }}
+      >
+        Clear
       </button>
     </div>
   )
