@@ -3,6 +3,7 @@
   padding: 0;
   font-family: consolas;
   box-sizing: border-box;
+ 
 }
 .container {
   display: flex;
@@ -11,8 +12,14 @@
   min-height: 100vh;
   background: white;
   flex-direction: column;
+  width: 100vw;
+  background: linear-gradient(to right, #232526, #414345);
 }
-
+.rules{
+  margin: 20px;
+  font-size: 20px;
+  color: white;
+}
 .grid {
   border: 10px solid pink;
 }
@@ -26,10 +33,48 @@
   letter-spacing: 4px;
   transition: 0.5s;
   font-size: 24px;
+  border-radius: 5px;
 }
 .presets button:hover {
   background: #03e9f4;
   color: #050801;
   box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
     0 0 200px #03e9f4;
+}
+.buttons button {
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 20px;
+  padding: 20px;
+  font-size: 24px;
+  background-color: grey;
+  box-shadow: 0 0 6px 0px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.buttons button:hover {
+  background: pink;
+  color: #050801;
+  box-shadow: 0 0 6px 0px;
+}
+
+.form input {
+  margin: 20px;
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 5px;
+  box-shadow: 0 0 6px 0px;
+}
+.form input:hover {
+  background: pink;
+  color: #050801;
+  box-shadow: 0 0 6px 0px;
+}
+.gen {
+  font-size: 24px;
+  margin: 20px;
+  padding: 5px;
 }
