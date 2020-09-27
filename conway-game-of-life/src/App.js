@@ -1,6 +1,19 @@
 import React, { useState, useRef } from "react"
 import "./App.css"
 import produce from "immer"
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+
+const useStyles = makeStyles({
+  root: {
+    width: 300,
+  },
+  input: {
+    width: 50,
+  },
+});
 
 const rowNum = 40
 const colNum = 80
@@ -70,6 +83,7 @@ function App() {
     size: 25,
     color: "Red",
   })
+
   const [run, setRun] = useState(false)
   const [gen, setGen] = useState(0)
 
@@ -150,6 +164,14 @@ function App() {
       ))
     )
   }
+
+  const classes = useStyles();
+  
+
+  const onhandleChange = (event, newValue) => {
+    setOptions({...options, speed: newValue});
+  };
+ 
   return (
     <div className="container">
       <div className="rules">
@@ -168,6 +190,41 @@ function App() {
                 </ul>
             </div>
         </div>
+        <div className = 'presets'>
+          <button onClick = {()=>setGrid(pulsar)}>Pulsar</button>
+          <button onClick ={()=>setGrid(gospersGliderGun)}> Gosper's Glider Gun</button>
+          <button onClick ={()=>setGrid(oscillators)}>Oscillators</button>
+          <form className="form">
+          <input
+            type="text"
+            name="color"
+            placeholder="Cell Color"
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="size"
+            placeholder="Cell Size"
+            step="1"
+            min="1"
+            onChange={handleChange}
+          />
+         
+           <div className={classes.root}>
+            <Typography id="continuous-slider" gutterBottom style = {{color: 'white', fontFamily: 'consolas', fontSize: '24px'}}>
+              Speed 
+              <p style = {{fontSize: '16px'}}>(slide to decrease the speed)</p>
+            </Typography>
+            <Grid container spacing={1}>
+              <Grid item>
+              </Grid>
+              <Grid item xs>
+                <Slider value={options.speed} onChange={onhandleChange} aria-labelledby="continuous-slider" />
+              </Grid>
+            </Grid>
+          </div>
+        </form>
+        </div>
       <div
         className="grid"
         style={{
@@ -178,35 +235,9 @@ function App() {
         {generateGrid()}
       </div>
       <section>
-        <div className = 'presets'>
-          <button onClick = {()=>setGrid(pulsar)}>Pulsar</button>
-          <button onClick ={()=>setGrid(gospersGliderGun)}> Gosper's Glider Gun</button>
-          <button onClick ={()=>setGrid(oscillators)}>Oscillators</button>
-        </div>
-        <form className="form">
-          <input
-            type="text"
-            name="color"
-            placeholder="Cell Color"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            name="size"
-            placeholder="Cell Size"
-            step="1"
-            min="1"
-            onChange={handleChange}
-          />
-          <input
-            type="number"
-            name="speed"
-            placeholder="Speed"
-            onChange={handleChange}
-          />
-        </form>
-        <div className = 'gen'>Generations:{gen}</div>
+     
         <div className="buttons">
+        <div className = 'gen'>Generations:{gen}</div>
           <button
             onClick={() => {
               if(grid === emptyGrid) {
@@ -228,6 +259,7 @@ function App() {
             onClick={() => {
               setGrid(emptyGrid)
               setGen(0)
+              setRun(!run)
             }}
           >
             Clear
@@ -236,12 +268,14 @@ function App() {
             onClick={() => {
               setGrid(randomGrid())
               setGen(0)
+           
             }}
           >
             Random Grid
           </button>
         </div>
       </section>
+     
     </div>
   )
 }

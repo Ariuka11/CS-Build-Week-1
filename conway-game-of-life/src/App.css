@@ -9,10 +9,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: white;
   flex-direction: column;
-  width: 100vw;
   background: linear-gradient(to right, #232526, #414345);
 }
 .rules{
@@ -20,10 +18,18 @@
   font-size: 20px;
   color: white;
 }
+
 .grid {
   border: 10px solid pink;
+  cursor: pointer;
+  display: inline-flex;
 }
 
+.presets {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 .presets button {
   background: linear-gradient(90deg, transparent, #4d7b7e);
   text-decoration: none;
@@ -34,12 +40,16 @@
   transition: 0.5s;
   font-size: 24px;
   border-radius: 5px;
+
 }
 .presets button:hover {
   background: #03e9f4;
   color: #050801;
   box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
     0 0 200px #03e9f4;
+}
+.buttons {
+  display: flex;
 }
 .buttons button {
   text-decoration: none;
@@ -60,16 +70,24 @@
   color: #050801;
   box-shadow: 0 0 6px 0px;
 }
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 .form input {
   margin: 20px;
   padding: 20px;
-  font-size: 24px;
+  font-size: 16px;
   border-radius: 5px;
   box-shadow: 0 0 6px 0px;
+  background-color: skyblue;
+ 
 }
 .form input:hover {
-  background: pink;
+  background: white;
   color: #050801;
   box-shadow: 0 0 6px 0px;
 }
@@ -77,4 +95,7 @@
   font-size: 24px;
   margin: 20px;
   padding: 5px;
+  color: white;
+  margin-right: 300px;
 }
+
